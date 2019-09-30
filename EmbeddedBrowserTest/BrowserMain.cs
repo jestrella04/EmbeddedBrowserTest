@@ -67,14 +67,8 @@ namespace EmbeddedBrowserTest
 
         private void BtnInfo_Click(object sender, EventArgs e)
         {
-            string msg = "";
-
-            msg += "Embedded Browser Test Tool created by Jonathan Estrella\n\n";
-            msg += "(c) 2019\n\n";
-            msg += "Icons created by Stefan Taubert\n";
-            msg += "Icons lincensed under the Creative Commons (Attribution 3.0 Unported) license\n\n";
-
-            MessageBox.Show(msg);
+            About aboutForm = new About();
+            aboutForm.ShowDialog(this);
         }
 
         private void TxtUrl_KeyDown(object sender, KeyEventArgs e)
