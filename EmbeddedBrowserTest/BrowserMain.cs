@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -88,6 +89,27 @@ namespace EmbeddedBrowserTest
         {
             txtUrl.Text = mainEmbeddedBrowser.Url.ToString();
             lblStatus.Text = "Completed.";
+        }
+
+        private void btnClearCache_Click(object sender, EventArgs e)
+        {
+            cmdRunCommand("RunDll32.exe InetCpl.cpl, ClearMyTracksByProcess 8");
+        }
+
+        private void cmdRunCommand(string command)
+        {
+            Process cmd = new Process();
+            cmd.StartInfo.FileName = "cmd.exe";
+            cmd.StartInfo.RedirectStandardInput = true;
+            cmd.StartInfo.RedirectStandardOutput = true;
+            cmd.StartInfo.CreateNoWindow = true;
+            cmd.StartInfo.UseShellExecute = false;
+            cmd.Start();
+
+            cmd.StandardInput.WriteLine(command);
+            cmd.StandardInput.Flush();
+            cmd.StandardInput.Close();
+            cmd.WaitForExit();
         }
     }
 }
